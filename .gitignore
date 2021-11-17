@@ -3,3 +3,5 @@ nimblecache/
 htmldocs/
 
 build/
+tests/*
+!tests/*.nim
