@@ -1,3 +1,3 @@
 import node
 
-proc create_nodes*(): seq[Node] = discard
+proc create_nodes*(): seq[INode] = discard

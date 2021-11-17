@@ -4,14 +4,18 @@ type
     health: int
     armor: int
 
-  Unit = object
+type
+  Unit* = object
     entity: Entity
     mana: int
 
-  Hero* = object
-    unit: Unit
 
-  Creep* = object
+proc health*(unit: Unit): int =
+  return unit.entity.health
+
+
+type
+  Hero* = object
     unit: Unit
 
   Building = object
@@ -25,38 +29,20 @@ type
 
 
 proc tick(entity: Entity) =
-  echo "Entity"
-
-
-proc tick(unit: Unit) =
+  discard
+proc tick*(unit: Unit) =
   unit.entity.tick()
-  echo "Unit"
-
-
-proc tick(creep: Creep) =
-  creep.unit.tick()
-  echo "Creep"
-
-
 proc tick(hero: Hero) =
   hero.unit.tick()
-  echo "Hero"
-
-
 proc tick(building: Building) =
   building.entity.tick()
-  echo "Building"
-
-
 proc tick(tower: Tower) =
   tower.building.tick()
-  echo "Tower"
-
-
 proc tick*(throne: Throne) =
   throne.building.tick()
-  echo "Throne"
 
+
+# Concept stuff
 
 type
   IEntity* = concept x
