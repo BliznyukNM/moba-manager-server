@@ -7,6 +7,24 @@
 
 import unittest
 
-import mmcore
-test "can add":
-  check add(5, 5) == 10
+import mmcore / [node, entity]
+
+
+test "hero ticks":
+  let heroes = @[Hero()]
+  heroes.process()
+
+
+test "lane node ticks":
+  let lanes = @[newLaneNode()]
+  lanes.process()
+
+
+test "jungle node ticks":
+  let jungles = @[newJungleNode()]
+  jungles.process()
+
+
+test "throne node ticks":
+  let thrones = @[newThroneNode()]
+  thrones.process()
