@@ -33,28 +33,33 @@ proc newEntity(armor: int): Entity =
 
 suite "armor":
 
-  test "armor 4, hit by 10 = 9 damage":
-    var e = newEntity(4)
-    e.damagePhysical(10)
-    check(e.health.current == 291)
-
-
-  test "armor 10, hit by 15 = 11 damage":
-    var e = newEntity(10)
-    e.damagePhysical(15)
-    check(e.health.current == 289)
-
-
-  test "armor -5, hit by 125 = 144 damage":
-    var e = newEntity(-5)
-    e.damagePhysical(125)
-    check(e.health.current == 156)
-    
-
-  test "armor -10, hit by 100 = 131 damage":
-    var e = newEntity(-10)
+  template armorTest(armor: int, expectingHealth: int) =
+    var e = newEntity(armor)
     e.damagePhysical(100)
-    check(e.health.current == 169)
+    check(e.health.current == expectingHealth)
+
+  test "armor 0 = 100% damage":
+    armorTest(0, 300 - 100)
+  test "armor 1 = 94% damage":
+    armorTest(1, 300 - 94)
+  test "armor 2 = 89% damage":
+    armorTest(2, 300 - 89)
+  test "armor 3 = 85% damage":
+    armorTest(3, 300 - 85)
+  test "armor 4 = 81% damage":
+    armorTest(4, 300 - 81)
+  test "armor 5 = 77% damage":
+    armorTest(5, 300 - 77)
+  test "armor -1 = 106% damage":
+    armorTest(-1, 300 - 106)
+  test "armor -2 = 111% damage":
+    armorTest(-2, 300 - 111)
+  test "armor -3 = 115% damage":
+    armorTest(-3, 300 - 115)
+  test "armor -4 = 119% damage":
+    armorTest(-4, 300 - 119)
+  test "armor -5 = 123% damage":
+    armorTest(-5, 300 - 123)
 
 
 suite "magic resist":

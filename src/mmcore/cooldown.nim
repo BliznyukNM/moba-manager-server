@@ -4,16 +4,16 @@ type
     current: Natural
 
 
+proc newCooldown*(max: Natural): Cooldown =
+  return Cooldown(max: max)
+
+
 proc max*(cooldown: Cooldown): int =
   return cooldown.max
 
 
 proc current*(cooldown: Cooldown): int =
   return cooldown.current
-
-
-proc newCooldown*(max: Natural): Cooldown =
-  return Cooldown(max: max)
 
 
 proc isReady*(cooldown: Cooldown): bool =

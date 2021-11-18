@@ -29,8 +29,12 @@ proc armor*(entity: Entity): int {.inline.} =
   return entity.armor
 
 
+const ARMOR_FACTOR = 0.06
+const ARMOR_BASE = 1
+
+
 proc applyArmor(damage: int, armor: int): int {.inline.} =
-  return int((float(damage) * (0.0625 + 1.5 / (0.6 + pow(E, 0.05 * float(armor))))).round)
+  return int((float(damage) * (1 - ARMOR_FACTOR * float(armor) / (ARMOR_BASE + ARMOR_FACTOR * abs(float(armor))))).round)
 
 
 proc applyMagicResist(damage: int, magicResist: float): int {.inline.} =
