@@ -9,8 +9,4 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.6.0"
-
-# Tasks
-
-task debug, "Compile debug library":
-  exec "nim c --app:staticlib --processing:filenames --out:build/mmcore.a --noMain:on src/mmcore"
+requires "nake >= 1.9.4"
