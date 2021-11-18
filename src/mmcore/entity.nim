@@ -1,7 +1,7 @@
 import resource, armor
 
 type
-  Entity* = object
+  Entity* = ref object
     name: string
     health: Resource
     armor: int

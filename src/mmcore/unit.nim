@@ -1,30 +1,42 @@
 import resource, entity
 
 type
-  Unit* = object
-    entity: Entity
+  Unit* = ref object
+    entity*: Entity
     mana: Resource
 
 
 proc newUnit*(name: string, health: Natural, mana: Natural, armor: int, magicResist: float): Unit {.inline.} =
-  return Unit(entity: newEntity(name, health, armor, magicResist), mana: newResource(mana))
+  Unit(entity: newEntity(name, health, armor, magicResist), mana: newResource(mana))
 
 
 proc name*(unit: Unit): string {.inline.} =
-  return unit.entity.name
+  unit.entity.name
 
 
 proc health*(unit: Unit): Resource {.inline.} =
-  return unit.entity.health
+  unit.entity.health
 
 
 proc mana*(unit: Unit): Resource {.inline.} =
-  return unit.mana
+  unit.mana
 
 
 proc armor*(unit: Unit): int {.inline.} =
-  return unit.armor
+  unit.entity.armor
 
 
 proc tick*(unit: Unit) =
   unit.entity.tick()
+
+
+proc damagePhysical*(unit: Unit, value: int) =
+  unit.entity.damagePhysical(value)
+
+
+proc damageMagical*(unit: Unit, value: int) =
+  unit.entity.damageMagical(value)
+
+
+proc damagePure*(unit: Unit, value: int) =
+  unit.entity.damagePure(value)

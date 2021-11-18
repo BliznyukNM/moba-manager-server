@@ -2,28 +2,28 @@ import unit, resource
 
 
 type
-  Creep* = object
-    unit: Unit
+  Creep* = ref object
+    unit*: Unit
 
 
 proc newCreep*(): Creep {.inline.} =
-  return Creep(unit: newUnit("creep", 100, 100, 2, 0.13))
+  Creep(unit: newUnit("creep", 100, 100, 2, 0.13))
 
 
 proc name*(creep: Creep): string {.inline.} =
-  return creep.unit.name
+  creep.unit.name
 
 
 proc health*(creep: Creep): Resource {.inline.} =
-  return creep.unit.health
+  creep.unit.health
 
 
 proc mana*(creep: Creep): Resource {.inline.} =
-  return creep.unit.mana
+  creep.unit.mana
 
 
 proc armor*(creep: Creep): int {.inline.} =
-  return creep.unit.armor
+  creep.unit.armor
 
 
 proc tick*(creep: Creep) =
