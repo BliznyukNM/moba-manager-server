@@ -1,5 +1,4 @@
-import resource
-import std / math
+import resource, armor
 
 type
   Entity* = object
@@ -27,18 +26,6 @@ proc name*(entity: Entity): string {.inline.} =
 
 proc armor*(entity: Entity): int {.inline.} =
   return entity.armor
-
-
-const ARMOR_FACTOR = 0.06
-const ARMOR_BASE = 1
-
-
-proc applyArmor(damage: int, armor: int): int {.inline.} =
-  return int((float(damage) * (1 - ARMOR_FACTOR * float(armor) / (ARMOR_BASE + ARMOR_FACTOR * abs(float(armor))))).round)
-
-
-proc applyMagicResist(damage: int, magicResist: float): int {.inline.} =
-  return int((float(damage) * (1 - magicResist)).round)
 
 
 proc damagePhysical*(entity: var Entity, value: int) =

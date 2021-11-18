@@ -5,3 +5,5 @@ htmldocs/
 build/
 tests/*
 !tests/*.nim*
+
+nakefile
