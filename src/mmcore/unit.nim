@@ -11,12 +11,20 @@ proc newUnit*(name: string, health: Natural,
   return Unit(entity: newEntity(name, health, armor), mana: newResource(mana))
 
 
+proc name*(unit: Unit): string {.inline.} =
+  return unit.entity.name
+
+
 proc health*(unit: Unit): Resource {.inline.} =
   return unit.entity.health
 
 
 proc mana*(unit: Unit): Resource {.inline.} =
   return unit.mana
+
+
+proc armor*(unit: Unit): int {.inline.} =
+  return unit.armor
 
 
 proc tick*(unit: Unit) =

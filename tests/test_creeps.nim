@@ -6,6 +6,7 @@ let c = newCreep()
 
 
 test "create":
+  require(c.name == "creep")
   require(c.health.max == 100)
   require(c.health.current == 100)
   require(c.mana.max == 100)
