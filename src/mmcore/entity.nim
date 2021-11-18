@@ -49,5 +49,9 @@ proc damageMagical*(entity: var Entity, value: int) =
   entity.health.change(-value.applyMagicResist(entity.magicResist))
 
 
+proc damagePure*(entity: var Entity, value: int) =
+  entity.health.change(-value)
+
+
 proc heal*(entity: var Entity, value: int) =
   entity.health.change(value)

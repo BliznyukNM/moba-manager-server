@@ -3,7 +3,7 @@ import mmcore / [entity, resource]
 
 
 suite "entity":
-  var e = newEntity("test", 300, 10, 0.13)
+  var e = newEntity("test", 300, 10, 0.25)
 
 
   test "create":
@@ -14,6 +14,18 @@ suite "entity":
   test "damage physical":
     let previousHealth = e.health.current
     e.damagePhysical(100)
+    require(previousHealth > e.health.current)
+
+
+  test "damage magical":
+    let previousHealth = e.health.current
+    e.damageMagical(100)
+    require(previousHealth > e.health.current)
+
+
+  test "damage pure":
+    let previousHealth = e.health.current
+    e.damagePure(100)
     require(previousHealth > e.health.current)
 
 
@@ -32,7 +44,6 @@ proc newEntity(armor: int): Entity =
 
 
 suite "armor":
-
   template armorTest(armor: int, expectingHealth: int) =
     var e = newEntity(armor)
     e.damagePhysical(100)
@@ -63,8 +74,7 @@ suite "armor":
 
 
 suite "magic resist":
-
-  test "mr 13%, hit by 10 = 9 damage":
+  test "mr 13% = 87% damage":
     var e = newEntity(0.13)
-    e.damageMagical(10)
-    check(e.health.current == 291)
+    e.damageMagical(100)
+    check(e.health.current == 300 - 87)
