@@ -18,4 +18,4 @@ task "echo-test-files", "Echo all test files":
 
 task "run-tests", "Run all tests":
   let files = getFilesInFolder(TestFolder)
-  for file in files: discard shell(nimExe, "c", "-r" , "--path:.", "--hint:Link:off", "--hint:Conf:off", "--hint:SuccessX:off", file)
+  for file in files: discard shell(nimExe, "c", "-r" , "--path:.", "--hint:Link:off", "--hint:Conf:off", "--hint:SuccessX:off", "--hint:CC:off", file)
