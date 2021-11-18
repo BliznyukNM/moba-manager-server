@@ -6,9 +6,8 @@ type
     mana: Resource
 
 
-proc newUnit*(name: string, health: Natural,
-              mana: Natural, armor: int): Unit {.inline.} =
-  return Unit(entity: newEntity(name, health, armor), mana: newResource(mana))
+proc newUnit*(name: string, health: Natural, mana: Natural, armor: int, magicResist: float): Unit {.inline.} =
+  return Unit(entity: newEntity(name, health, armor, magicResist), mana: newResource(mana))
 
 
 proc name*(unit: Unit): string {.inline.} =

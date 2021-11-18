@@ -7,7 +7,7 @@ type
 
 
 proc newCreep*(): Creep {.inline.} =
-  return Creep(unit: newUnit("creep", 100, 100, 2))
+  return Creep(unit: newUnit("creep", 100, 100, 2, 0.13))
 
 
 proc name*(creep: Creep): string {.inline.} =

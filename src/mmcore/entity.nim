@@ -6,11 +6,11 @@ type
     name: string
     health: Resource
     armor: int
+    magicResist: float
 
 
-proc newEntity*(name: string, health: Natural,
-                armor: int): Entity {.inline.} =
-  return Entity(name: name, health: newResource(health), armor: armor)
+proc newEntity*(name: string, health: Natural, armor: int, magicResist: float): Entity {.inline.} =
+  return Entity(name: name, health: newResource(health), armor: armor, magicResist: magicResist)
 
 
 proc tick*(entity: Entity) =
@@ -29,12 +29,20 @@ proc armor*(entity: Entity): int {.inline.} =
   return entity.armor
 
 
-proc applyArmor*(damage: int, armor: int): int {.inline.} =
-  return int(float(damage) * (0.0625 + 1.5 / (0.6 + pow(E, 0.05 * float(armor)))))
+proc applyArmor(damage: int, armor: int): int {.inline.} =
+  return int((float(damage) * (0.0625 + 1.5 / (0.6 + pow(E, 0.05 * float(armor))))).round)
+
+
+proc applyMagicResist(damage: int, magicResist: float): int {.inline.} =
+  return int((float(damage) * (1 - magicResist)).round)
 
 
 proc damagePhysical*(entity: var Entity, value: int) =
   entity.health.change(-value.applyArmor(entity.armor))
+
+
+proc damageMagical*(entity: var Entity, value: int) =
+  entity.health.change(-value.applyMagicResist(entity.magicResist))
 
 
 proc heal*(entity: var Entity, value: int) =

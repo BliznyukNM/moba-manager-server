@@ -3,7 +3,7 @@ import mmcore / [entity, resource]
 
 
 suite "entity":
-  var e = newEntity("test", 300, 10)
+  var e = newEntity("test", 300, 10, 0.13)
 
 
   test "create":
@@ -23,27 +23,43 @@ suite "entity":
     require(previousHealth < e.health.current)
 
 
+proc newEntity(magicResist: float): Entity =
+  return newEntity("test", 300, 0, magicResist)
+
+
+proc newEntity(armor: int): Entity =
+  return newEntity("test", 300, armor, 0)
+
+
 suite "armor":
 
-  test "armor 4, hit by 10 = 8 damage":
-    var e = newEntity("test", 300, 4)
+  test "armor 4, hit by 10 = 9 damage":
+    var e = newEntity(4)
     e.damagePhysical(10)
-    check(e.health.current == 292)
+    check(e.health.current == 291)
 
 
-  test "armor 10, hit by 15 = 10 damage":
-    var e = newEntity("test", 300, 10)
+  test "armor 10, hit by 15 = 11 damage":
+    var e = newEntity(10)
     e.damagePhysical(15)
-    check(e.health.current == 290)
+    check(e.health.current == 289)
 
 
-  test "armor -5, hit by 125 = 143 damage":
-    var e = newEntity("test", 300, -5)
+  test "armor -5, hit by 125 = 144 damage":
+    var e = newEntity(-5)
     e.damagePhysical(125)
-    check(e.health.current == 157)
+    check(e.health.current == 156)
     
 
-  test "armor -10, hit by 100 = 130 damage":
-    var e = newEntity("test", 300, -10)
+  test "armor -10, hit by 100 = 131 damage":
+    var e = newEntity(-10)
     e.damagePhysical(100)
-    check(e.health.current == 170)
+    check(e.health.current == 169)
+
+
+suite "magic resist":
+
+  test "mr 13%, hit by 10 = 9 damage":
+    var e = newEntity(0.13)
+    e.damageMagical(10)
+    check(e.health.current == 291)
