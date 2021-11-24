@@ -2,12 +2,16 @@ import resource, entity
 
 type
   Unit* = ref object
-    entity*: Entity
+    entity: Entity
     mana: Resource
 
 
 proc newUnit*(name: string, health: Natural, mana: Natural, armor: int, magicResist: float): Unit {.inline.} =
   Unit(entity: newEntity(name, health, armor, magicResist), mana: newResource(mana))
+
+
+proc entity*(unit: Unit): Entity {.inline.} =
+  unit.entity
 
 
 proc name*(unit: Unit): string {.inline.} =

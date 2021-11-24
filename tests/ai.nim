@@ -1,5 +1,5 @@
-import unittest
-import mmcore / creep
+# import unittest
+import mmcore / [creep, unit]
 import mmcore / ai / lanecreep
 
 

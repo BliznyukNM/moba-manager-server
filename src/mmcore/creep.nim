@@ -3,11 +3,15 @@ import unit, resource
 
 type
   Creep* = ref object
-    unit*: Unit
+    unit: Unit
 
 
 proc newCreep*(): Creep {.inline.} =
   Creep(unit: newUnit("creep", 100, 100, 2, 0.13))
+
+
+proc unit*(creep: Creep): Unit {.inline.} =
+  creep.unit
 
 
 proc name*(creep: Creep): string {.inline.} =
